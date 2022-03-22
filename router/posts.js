@@ -25,7 +25,8 @@ router.get('/upload', (req, res) => {
 
 // 게시글 POST API
 router.post('/upload', async (req, res) => {
-    const { id, title, pw, comment } = req.body
+    const { title, pw, comment } = req.body
+    const ID = req.body.id
     const date = new Date()
     let count = 0
     console.log(id, title, pw, comment)
