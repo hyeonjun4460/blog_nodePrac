@@ -34,20 +34,21 @@ router.post('/upload', async (req, res) => {
         res.json({ success: false, errormsg: '중복된 아이디가 있습니다.' })
     }
     // count 예외처리
-    if (!posts.length) {
+    else if (!posts.length) {
         count = 0
     } else {
         count = posts[posts.length - 1].count + 1
+
+        await Posts.create({
+            id,
+            title,
+            pw,
+            comment,
+            date,
+            count // 각 게시글에 고유값 지정 위해서...
+        })
+        res.json({ success: true })
     }
-    await Posts.create({
-        id,
-        title,
-        pw,
-        comment,
-        date,
-        count // 각 게시글에 고유값 지정 위해서...
-    })
-    res.json({ success: true })
 })
 
 // 상세 게시글 조회 API

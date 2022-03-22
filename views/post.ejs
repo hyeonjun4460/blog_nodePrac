@@ -129,6 +129,20 @@ main {
             let comment = $('#comment').val()
             let pw = $('#password').val()
 
+            if (id === ''){
+                alert('아이디를 입력해주세요')
+            }
+            if (title === ''){
+                alert('제목을 입력해주세요')
+            }
+            if (comment === ''){
+                alert('내용을 입력해주세요')
+            }
+            if (pw === ''){
+                alert('비밀번호를 입력해주세요')
+            }
+            
+
             // pw 숫자 아닐 경우 예외처리
             if (isNaN(pw)){
                 alert('비밀번호는 숫자로만 적어주세요')
