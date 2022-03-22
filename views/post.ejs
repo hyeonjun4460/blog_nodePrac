@@ -130,7 +130,7 @@ main {
             let pw = $('#password').val()
 
             // pw 숫자 아닐 경우 예외처리
-            if (isNan(pw)){
+            if (isNaN(pw)){
                 alert('비밀번호는 숫자로만 적어주세요')
                 return
             }
@@ -142,7 +142,11 @@ main {
                 id, title, comment, pw 
                 },
                 success: function (response) {
+                    if (response['success']){
                     window.location.href = '/posts'
+                }else{
+                    alert(response['errormsg'])
+                    }
                 }
             });
         }

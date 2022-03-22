@@ -47,7 +47,7 @@ router.post('/upload', async (req, res) => {
         date,
         count // 각 게시글에 고유값 지정 위해서...
     })
-    res.json({ success: true, post: posts })
+    res.json({ success: true })
 })
 
 // 상세 게시글 조회 API
