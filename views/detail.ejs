@@ -125,27 +125,6 @@ main {
     text-align: left;
 }
     </style>
-
-    <script>
-
-        function post(){
-            let id = $('#id').val()
-            let title = $('#title').val()
-            let comment = $('#comment').val()
-            let pw = $('#password').val()
-            console.log(id, title, comment, pw)
-            $.ajax({
-                type: 'POST',
-                url: '/posts/upload',
-                data: {
-                id, title, comment, pw
-                },
-                success: function (response) {
-                    window.location.href = '/posts'
-                }
-            });
-        }
-    </script>
 </head>
 <body>
     <header class="title">
@@ -162,12 +141,11 @@ main {
         <div class="wrap">
             <div class="review">
                 <div class="showtable">
-                    <p id = 'id'><%= post[0]['id'] %></p>
-                    <p id = 'title'><%= post[0]['title']%></p>
-                    <p id = 'comment'class = 'last'><%= post[0]['comment']%></p>
+                    <p id = 'id'> ID: <%= post[0]['id'] %></p>
+                    <p id = 'title'>제목: <%= post[0]['title']%></p>
+                    <p id = 'comment'class = 'last'>내용: <%= post[0]['comment']%></p>
                     <div class="btn">
                         <button onclick="window.location.href = '/posts'">뒤로가기</button>
-                        <button onclick="post()">글쓰기</button>
                     </div>
                 </div>
             </div>

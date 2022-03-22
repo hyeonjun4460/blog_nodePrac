@@ -14,7 +14,6 @@ router.get('/', async (req, res) => {
         }
     }) // 작성날짜 기준 내림차순 정렬해서 return
 
-
     res.render('../views/index', {
         post
     })
@@ -30,16 +29,15 @@ router.post('/upload', async (req, res) => {
     const date = new Date()
     let count = 0
     posts = await Posts.find({})
-    count = posts.length
-
-    console.log(posts.length)
+    count = posts[posts.length - 1].count + 1
+    console.log(count, posts.length)
     await Posts.create({
         id,
         title,
         pw,
         comment,
         date,
-        count
+        count // 각 게시글에 고유값 지정 위해서...
     })
     res.json({ success: true, post: posts })
 })
@@ -50,6 +48,50 @@ router.get('/:count', async (req, res) => {
     const post = await Posts.find({ count: Number(Count) }, { _id: false, pw: false })
     // res.json({ success: true, post: post })
     res.render('../views/detail', { post })
+})
+
+
+// 수정 페이지 이동
+router.get('/:count/edit', async (req, res) => {
+    const Count = req.params.count
+    const post = await Posts.find({ count: Number(Count) }, { _id: false })
+    res.render('../views/edit', { post })
+})
+
+router.put('/:count/edit', async (req, res) => {
+    const Count = req.params.count
+    // 비밀번호, 수정 내용 가져오기
+    const { pw, comment } = req.body
+    const existpost = await Posts.find({ count: Number(Count) }, { _id: false })
+    // 게시글이 존재하고, 비밀번호가 동일하면 삭제
+    if (existpost.length) {
+        if (Number(pw) === Number(existpost[0].pw)) {
+            await Posts.updateOne({ count: Number(Count) }, { $set: { comment } })
+            res.json({ success: true, msg: '수정 완료했습니다.' })
+        }
+        else {
+            res.json({ success: false, errormsg: '비밀번호가 틀립니다.' })
+        }
+    }
+})
+
+//  상세 게시글 삭제
+router.delete('/:count/edit', async (req, res) => {
+    const Count = req.params.count
+    // 비밀번호, 수정 내용 가져오기
+    const { pw } = req.body
+    const existpost = await Posts.find({ count: Number(Count) }, { _id: false })
+
+    // 게시글이 존재하고, 비밀번호가 동일하면 삭제
+    if (existpost.length) {
+        if (Number(pw) === Number(existpost[0].pw)) {
+            await Posts.deleteOne({ count: Number(Count) })
+            res.json({ success: true, msg: '삭제했습니다.' })
+        }
+        else {
+            res.json({ success: false, errormsg: '비밀번호가 틀립니다.' })
+        }
+    }
 })
 
 module.exports = router
