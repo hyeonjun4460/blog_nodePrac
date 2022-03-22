@@ -132,23 +132,19 @@ main {
             if (id === ''){
                 alert('아이디를 입력해주세요')
             }
-            if (title === ''){
+            else if (title === ''){
                 alert('제목을 입력해주세요')
             }
-            if (comment === ''){
+            else if (comment === ''){
                 alert('내용을 입력해주세요')
             }
-            if (pw === ''){
+            else if (pw === ''){
                 alert('비밀번호를 입력해주세요')
-            }
-            
-
-            // pw 숫자 아닐 경우 예외처리
-            if (isNaN(pw)){
+            }else if (isNaN(pw)){
                 alert('비밀번호는 숫자로만 적어주세요')
                 return
             }
-            console.log(id, title, comment, pw)
+            else{
             $.ajax({
                 type: 'POST',
                 url: '/posts/upload',
@@ -163,7 +159,7 @@ main {
                     }
                 }
             });
-        }
+        }}
     </script>
 </head>
 <body>
