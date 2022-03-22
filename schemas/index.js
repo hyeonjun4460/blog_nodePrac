@@ -6,7 +6,7 @@ const express = require('express')
 
 // db 연결
 const connect = () => {
-    mongoose.connect('mongodb://localhost:27017/blog', { ignoreUndefined: true }).catch((err) => {
+    mongoose.connect('mongodb://13.125.247.222:27017/blog_nodePrac', { ignoreUndefined: true }).catch((err) => {
         console.error(err)
     })
 }
