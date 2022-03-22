@@ -25,18 +25,18 @@ router.get('/upload', (req, res) => {
 
 // 게시글 POST API
 router.post('/upload', async (req, res) => {
-    const { id, title, pw, comment } = req.body
+    const { title, pw, comment } = req.body
+    const ID = req.body.id
     const date = new Date()
     let count = 0
     console.log(id, title, pw, comment)
     posts = await Posts.find({})
     // 아이디 중복 예외 처리
-    if (id === await Posts.find({ id })[0].id) {
+    if (ID === await Posts.find({ id: ID })[0].id) {
         res.json({ success: false, errormsg: '중복된 아이디가 있습니다.' })
-        return
     }
     // count 예외처리
-    else if (!posts.length) {
+    if (!posts.length) {
         count = 0
     } else {
         count = posts[posts.length - 1].count + 1
