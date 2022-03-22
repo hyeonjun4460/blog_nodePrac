@@ -31,12 +31,12 @@ router.post('/upload', async (req, res) => {
     console.log(id, title, pw, comment)
     posts = await Posts.find({})
     // 아이디 중복 예외 처리
-    if (id === await Posts.find({ id })[0].id) {
-        res.json({ success: false, errormsg: '중복된 아이디가 있습니다.' })
-        return
-    }
+    // if (id === await Posts.find({ id })[0].id) {
+    //     res.json({ success: false, errormsg: '중복된 아이디가 있습니다.' })
+    //    return
+    // }
     // count 예외처리
-    else if (!posts.length) {
+    if (!posts.length) {
         count = 0
     } else {
         count = posts[posts.length - 1].count + 1
