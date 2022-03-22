@@ -29,8 +29,8 @@ router.post('/upload', async (req, res) => {
     const date = new Date()
     let count = 0
     posts = await Posts.find({})
+    console.log(posts)
     count = posts[posts.length - 1].count + 1
-    console.log(count, posts.length)
     await Posts.create({
         id,
         title,
