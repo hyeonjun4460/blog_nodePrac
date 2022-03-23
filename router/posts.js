@@ -1,3 +1,4 @@
+// 초기화
 // EXPRESS
 const express = require('express')
 const app = express()
