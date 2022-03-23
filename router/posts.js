@@ -25,11 +25,9 @@ router.get('/upload', (req, res) => {
 
 // 게시글 POST API
 router.post('/upload', async (req, res) => {
-    const { title, pw, comment } = req.body
-    const ID = req.body.id
+    const { id, title, pw, comment } = req.body
     const date = new Date()
     let count = 0
-    console.log(id, title, pw, comment)
     posts = await Posts.find({})
     // 아이디 중복 예외 처리
     // if (id === await Posts.find({ id })[0].id) {
