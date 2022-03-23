@@ -36,6 +36,7 @@ router.post('/upload', async (req, res) => {
     //     res.json({ success: false, errormsg: '중복된 아이디가 있습니다.' })
     //    return
     // }
+
     // count 예외처리
     if (!posts.length) {
         count = 0

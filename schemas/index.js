@@ -4,9 +4,12 @@
 const { default: mongoose } = require('mongoose')
 const express = require('express')
 
+const mongoId = process.env.ID
+const mongopw = process.env.PW
+
 // db 연결
 const connect = () => {
-    mongoose.connect('mongodb://localhost:27017/blog_nodePrac', { ignoreUndefined: true }).catch((err) => {
+    mongoose.connect(`mongodb://${mongoId}:${mongopw}@localhost:27017/blog_nodePrac?authSource=admin&authMechanism=SCRAM-SHA-1`, { ignoreUndefined: true }).catch((err) => {
         console.error(err) // 서버 입장에선 localhost임
     })
 }

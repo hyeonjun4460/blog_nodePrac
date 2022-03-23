@@ -4,6 +4,9 @@ const port = 3000
 const postsrouter = require('./router/posts')
 const connect = require('./schemas/index')
 const ejs = require('ejs')
+
+require('dotenv').config()
+
 connect()
 
 // 뷰 엔진 및 경로 설정
