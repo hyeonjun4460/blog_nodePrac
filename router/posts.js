@@ -9,7 +9,7 @@ const router = express.Router()
 // 전체 게시글 조회 API
 router.get('/', async (req, res) => {
     const post = await (await Posts.find({}, { _id: false, pw: false, comment: false })).sort((a, b) => {
-        if (a.date > b.date) {
+        if (a.count > b.count) {
             return -1
         }
     }) // 작성날짜 기준 내림차순 정렬해서 return
